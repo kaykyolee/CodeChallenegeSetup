@@ -11,7 +11,19 @@ let currentCatTax = 0;
 // 6) If the random number is 0, update the pay button so that it is hidden.
 // 7) Both the amountOwed and pay amount button should be updated every time the calculate cat tax button is clicked.
 
-function calcButtonClick() {}
+
+function calcButtonClick() {
+currentCatTax= Math.floor (Math.random ()*21)
+let amountOwed=document.getElementById('amountOwed')
+let payButton=document.getElementById ('payButton')
+
+
+if (currentCatTax!==0){
+    amountOwed.textContent=`You owe ${currentCatTax} cat tax! Pay up!`
+    payButton.style.display='inline-block'
+} else {
+    amountOwed.textContent=`You owe ${currentCatTax} cat tax! You've escaped this time!`
+}}
 
 // TODO: payButton function
 // Function should handle the following items:
@@ -20,6 +32,25 @@ function calcButtonClick() {}
 // 3) If the remaining cat tax is zero or fewer, update the amountOwed div to display "Your debts are paid..."
 // 4) If the cat tax was payable (amount was greater than 0) when the button was clicked, make a call to the cat api to get a cat image (https://api.thecatapi.com/v1/images/search)
 // 5) Once the cat image is retrieved, append the image to the image container
-// 6) If the cat wax was not payable (amount was less than or equal to 0) when the button was clicked, replace the entire contents of the container with the gif found here (https://gfycat.com/snivelingbeautifuljoey-cat)
+// 6) If the cat tax was not payable (amount was less than or equal to 0) when the button was clicked, replace the entire contents of the container with the gif found here (https://gfycat.com/snivelingbeautifuljoey-cat)
 
-function payButton() {}
+function payButton() {
+let catImage=document.createElement("IMG")
+
+    currentCatTax--;
+    if (currentCatTax>0){
+        amountOwed.textContent=`You still owe ${currentCatTax} cat tax! Pay up!`
+        fetch("https://api.thecatapi.com/v1/images/search")
+        .then (response => {
+            response.json()
+            .then (resp =>{
+                catImage.src=resp[0].url
+                catImage.style.size='100px,100px,100px,100px'
+                imageContainer.append(catImage)
+                console.log (resp)    
+            })
+        })
+    } else{
+        amountOwed.textContent='Your debts are paid...'
+    }
+}
