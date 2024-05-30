@@ -23,6 +23,7 @@ if (currentCatTax!==0){
     payButton.style.display='inline-block'
 } else {
     amountOwed.textContent=`You owe ${currentCatTax} cat tax! You've escaped this time!`
+    payButton.style.display='none'
 }}
 
 // TODO: payButton function
@@ -36,6 +37,7 @@ if (currentCatTax!==0){
 
 function payButton() {
 let catImage=document.createElement("IMG")
+let catGif=document.createElement("IMG")
 
     currentCatTax--;
     if (currentCatTax>0){
@@ -45,12 +47,24 @@ let catImage=document.createElement("IMG")
             response.json()
             .then (resp =>{
                 catImage.src=resp[0].url
-                catImage.style.size='100px,100px,100px,100px'
+                catImage.style.height='200px'
+                catImage.style.width='200px'
                 imageContainer.append(catImage)
                 console.log (resp)    
+                console.log(currentCatTax)
             })
         })
-    } else{
+    } else if(currentCatTax===0)  {
         amountOwed.textContent='Your debts are paid...'
-    }
+        console.log(currentCatTax)
 }
+else if (currentCatTax<0) {
+document.documentElement.innerHTML=''; 
+catGif.src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWRiemd2N2YyNzUwdG5pcTE4ZXd2Z202dXI0cnVzNmJnbWtkY3ZtcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nKy3VHrdgaONa/giphy.webp'
+document.documentElement.append(catGif)
+catGif.style.heigth='400px'
+catGif.style.width='500px'
+
+}
+}
+

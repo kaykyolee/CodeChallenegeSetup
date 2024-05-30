@@ -3,6 +3,22 @@
 
 }
 
-#imageContainer{
-    size: 100%;
+html {
+    display: table;
+    margin: auto;
+    align-items: center;
 }
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+
+/* #imageContainer{
+    width: 100px;
+    height:100px;
+} */
